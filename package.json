@@ -9,10 +9,11 @@
     "geodata"
   ],
   "dependencies": {
-    "srs": "~0.4.3",
-    "mapnik": "3.1.x",
     "sphericalmercator": "1.0.2",
-    "gdal": "0.2.0"
+    "gdal": "0.3.1",
+    "geocsv-info": "^0.0.1",
+    "async": "^0.9.0",
+    "lodash": "^2.4.1"
   },
   "repository": {
     "type": "git",

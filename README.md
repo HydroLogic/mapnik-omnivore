@@ -1,52 +1,58 @@
 # mapnik-omnivore
+
+[![NPM version](http://img.shields.io/npm/v/mapnik-omnivore.svg)](https://www.npmjs.org/package/mapnik-omnivore)
+[![Build Status](http://img.shields.io/travis/mapbox/mapnik-omnivore/master.svg)](https://travis-ci.org/mapbox/mapnik-omnivore)
+[![Coverage Status](http://img.shields.io/coveralls/mapbox/mapnik-omnivore/master.svg)](https://coveralls.io/r/mapbox/mapnik-omnivore)
+
+
 Node module that returns metadata of spatial files.
-Version format follows [Semantic Version](http://semver.org/)
+Version format follows [Semantic Version](http://semver.org/).
 
-[![Build Status](https://travis-ci.org/mapbox/mapnik-omnivore.svg?branch=master)](https://travis-ci.org/mapbox/mapnik-omnivore) [![Coverage Status](https://coveralls.io/repos/mapbox/mapnik-omnivore/badge.png)](https://coveralls.io/r/mapbox/mapnik-omnivore)
+```sh
+$ npm install mapnik-omnivore --save
+```
 
-Currently supports the following file types:
+## Supported Formats
+
 - geojson/topojson
 - `.kml`
 - `.gpx`
 - `.tif`
-- `.vrt` : raster files listed in the VRT file must be in the same directory as the VRT file
-- `.csv` : must be valid geo CSV, and can be in the form of `.csv`, `.txt`, or `.tsv`
-- `.shp` : In order to set the projection, the `.prj` file must be in the same directory and have the same name as the `.shp` file
+- `.vrt`: raster files listed in the VRT file must be in the same directory as the VRT file
+- `.csv`: must be valid geo CSV, and can be in the form of `.csv`, `.txt`, or `.tsv`
+- `.shp`: In order to set the projection, the `.prj` file must be in the same directory and have the same name as the `.shp` file.
 
-
-# Example
+## Example
 
 ```
-var mapnikOmnivore = require('mapnik-omnivore'),
-    path = require('path');
-
+var mapnikOmnivore = require('mapnik-omnivore');
+var path = require('path');
 var file = path.resolve('test/data/zip/world_merc/world_merc.shp');
 
-mapnikOmnivore.digest(file, function(err, metadata){
-	if(err) return callback(err);
-	else {
-		console.log('Metadata returned!');
-		console.log(metadata);
-	}
+mapnikOmnivore.digest(file, function(err, metadata) {
+    if (err) return callback(err);
+    console.log('Metadata returned!');
+    console.log(metadata);
 });
 ```
 
+## Usage
 
-### mapnikOmnivore.digest(filepath, callback)
-- filepath `required`
-- callback `(err, metadata)`
+##### `mapnikOmnivore.digest(filepath, callback)`
 
+- `filepath`
+- `callback(err, metadata)`
 
-#### Example of returned `metadata`
-```
- metadata: 
+### Sample Result
+
+```js
 { filesize: 428328,   // size of file in bytes
   projection: '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over',
   filename: 'world_merc',
   center: [ 0, 12.048603815490733 ],
   extent: [ -180, -59.47306100000001, 180, 83.57026863098147 ],
   json: { 
-  	vector_layers: [ { 
+    vector_layers: [ { 
       id: 'world_merc',
       description: '',
       minzoom: 0,
@@ -74,7 +80,6 @@ mapnikOmnivore.digest(file, function(err, metadata){
 
 Raster files will include a `raster` object:
 ```
- metadata:
 { filesize: 1494,
   projection: '+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=23 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs',
   raster: 
@@ -101,16 +106,8 @@ Raster files will include a `raster` object:
 
 ```
 
-
-## Install
-With npm:
-```
-npm install mapnik-omnivore
-```
-
-
-Run `node runModule.js` from the root to try it out.
-
-
 ## Tests
-`npm test`
+
+```sh
+$ npm test
+```

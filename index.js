@@ -1,3 +1,3 @@
 module.exports = {
-    digest:      require('./lib/digest.js')
+    digest: require('./lib/digest.js')
 };
